@@ -1,0 +1,618 @@
+fileFormatVersion: 2
+guid: de1ae5d60a5e66249aa0821aa55bfa95
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 650
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_0
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 8313
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a6baf82ea1fc4a4db10c72602b4621a
+      internalID: -1496531131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_1
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 8313
+        width: 839
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13fe151901e1640418799e95c59a7b8c
+      internalID: 172285236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_2
+      rect:
+        serializedVersion: 2
+        x: 4698
+        y: 8313
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee25ea28b9d39640a45f0909d87675a
+      internalID: 1396084270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_3
+      rect:
+        serializedVersion: 2
+        x: 6748
+        y: 8313
+        width: 839
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69df34c0c02f53e41b2af7919d89523e
+      internalID: 1069115974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_4
+      rect:
+        serializedVersion: 2
+        x: 8793
+        y: 8313
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b11436104a774f6488e8d501d8f3bc61
+      internalID: -957191738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_5
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 6268
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b18ef05cefc47d43b54a6631b6bd7db
+      internalID: -278192286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_6
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 6268
+        width: 839
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7c75ae37abb782498854e5eca8790e1
+      internalID: 88739599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_7
+      rect:
+        serializedVersion: 2
+        x: 4698
+        y: 6268
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe427fa9ae694344a6ebf887dffa521
+      internalID: -1466359707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_8
+      rect:
+        serializedVersion: 2
+        x: 6748
+        y: 6268
+        width: 839
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c1732d13a771ce4e8a32bd2f4ff17df
+      internalID: -1038650351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_9
+      rect:
+        serializedVersion: 2
+        x: 8793
+        y: 6268
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fda37b18bac5bc4da9ecf07fef91d6c
+      internalID: 854069486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_10
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 4218
+        width: 1004
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fae417f57523c44499f62b15a765b56e
+      internalID: 1882428643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_11
+      rect:
+        serializedVersion: 2
+        x: 2653
+        y: 4218
+        width: 999
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35216950118406348a1744eaefc4d113
+      internalID: -419677712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_12
+      rect:
+        serializedVersion: 2
+        x: 4698
+        y: 4218
+        width: 1004
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e35973371d4a324d9c98c82ed7aa6af
+      internalID: 440043123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_13
+      rect:
+        serializedVersion: 2
+        x: 6748
+        y: 4218
+        width: 999
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c340451ffa86c04e9d9581a2ff7c204
+      internalID: -619355077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_14
+      rect:
+        serializedVersion: 2
+        x: 8793
+        y: 4218
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68e3c2db6ab2462468b0385aa52edd92
+      internalID: -1726228180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_15
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 2173
+        width: 844
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 079a0ec0faf3123469e1f353988c2b3e
+      internalID: -228314680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_16
+      rect:
+        serializedVersion: 2
+        x: 2588
+        y: 2173
+        width: 969
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98c2f5b849bce2947984108dd62876bc
+      internalID: 1147852383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_17
+      rect:
+        serializedVersion: 2
+        x: 4633
+        y: 2173
+        width: 974
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec454ae8497d19f42903f851951c5b27
+      internalID: 677122193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_18
+      rect:
+        serializedVersion: 2
+        x: 6683
+        y: 2173
+        width: 969
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 668bee2986ddfe247b82438428269471
+      internalID: 321326567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_19
+      rect:
+        serializedVersion: 2
+        x: 8733
+        y: 2173
+        width: 969
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 438986c950956b84ea4f7061905507ee
+      internalID: 1222290350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_20
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 123
+        width: 969
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb7eed27cff98414bbcd5623f9df98b7
+      internalID: -1069153648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ted 2.0 Idle (no jetpack)_21
+      rect:
+        serializedVersion: 2
+        x: 2588
+        y: 123
+        width: 969
+        height: 1834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4a619ae74ebe934ba8ab4c1e5783736
+      internalID: 644875322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Ted 2.0 Idle (no jetpack)_4: -957191738
+      Ted 2.0 Idle (no jetpack)_11: -419677712
+      Ted 2.0 Idle (no jetpack)_13: -619355077
+      Ted 2.0 Idle (no jetpack)_14: -1726228180
+      Ted 2.0 Idle (no jetpack)_3: 1069115974
+      Ted 2.0 Idle (no jetpack)_7: -1466359707
+      Ted 2.0 Idle (no jetpack)_18: 321326567
+      Ted 2.0 Idle (no jetpack)_17: 677122193
+      Ted 2.0 Idle (no jetpack)_16: 1147852383
+      Ted 2.0 Idle (no jetpack)_19: 1222290350
+      Ted 2.0 Idle (no jetpack)_21: 644875322
+      Ted 2.0 Idle (no jetpack)_2: 1396084270
+      Ted 2.0 Idle (no jetpack)_6: 88739599
+      Ted 2.0 Idle (no jetpack)_12: 440043123
+      Ted 2.0 Idle (no jetpack)_9: 854069486
+      Ted 2.0 Idle (no jetpack)_5: -278192286
+      Ted 2.0 Idle (no jetpack)_10: 1882428643
+      Ted 2.0 Idle (no jetpack)_1: 172285236
+      Ted 2.0 Idle (no jetpack)_8: -1038650351
+      Ted 2.0 Idle (no jetpack)_15: -228314680
+      Ted 2.0 Idle (no jetpack)_20: -1069153648
+      Ted 2.0 Idle (no jetpack)_0: -1496531131
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
