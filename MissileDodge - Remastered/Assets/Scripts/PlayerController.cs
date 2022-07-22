@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         //Set/Check the player's grounded status once per frame.
         is_grounded = IsGrounded();
 
+
         if (Input.GetKey(move_left))
         {
             animator.SetBool("is_running", true);
@@ -107,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
         if (y_intent == Intent.Jump && IsGrounded())
         {
+            animator.SetBool("is_jumping", true);
             rb2D.velocity = new Vector2(rb2D.velocity.x, jump_height); //Move the player up
             jump_on_cooldown = true;
         }
@@ -116,7 +118,20 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, distance_to_ground + 0.1f); //Send out a raycast below the player's feet.
 
-        return (hit.collider != null); //If it hits something, we must be standing on a surface and therefore we are grounded.
-        
+        if (hit.collider != null)
+        {
+            //If it hits something, we must be standing on a surface and therefore we are grounded.
+            if (animator.GetBool("is_jumping"))
+            {
+                animator.SetBool("is_jumping", false);
+
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

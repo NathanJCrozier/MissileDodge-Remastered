@@ -204,9 +204,9 @@ GameObject:
   - component: {fileID: 179325136}
   - component: {fileID: 179325135}
   - component: {fileID: 179325134}
-  - component: {fileID: 179325138}
   - component: {fileID: 179325133}
   - component: {fileID: 179325139}
+  - component: {fileID: 179325140}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -264,7 +264,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 179325132}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 13f2ffda97bf67b498e2ffbfa7e295a2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -348,32 +348,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &179325138
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179325132}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 13f2ffda97bf67b498e2ffbfa7e295a2, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.04, y: 0.03}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2984616, y: 2.8215387}
-    newSize: {x: 1.3, y: 1.94}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.43, y: 2.79}
-  m_EdgeRadius: 0
 --- !u!95 &179325139
 Animator:
   serializedVersion: 4
@@ -394,6 +368,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &179325140
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179325132}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 13f2ffda97bf67b498e2ffbfa7e295a2, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.2984616, y: 2.8215387}
+  m_Direction: 0
 --- !u!1 &448889716
 GameObject:
   m_ObjectHideFlags: 0
