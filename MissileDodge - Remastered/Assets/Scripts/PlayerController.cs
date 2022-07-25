@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public Animator animator;
-    private Collider2D colldr;
+    private BoxCollider2D box_colldr;
     private Rigidbody2D rb2D;
+    private CapsuleCollider2D cap_colldr;
     private float distance_to_ground;
-    public KeyCode move_left;
-    public KeyCode move_right;
-    public KeyCode jump;
-    public float movement_speed = 10f;
-    public float jump_height;
-    public bool is_grounded;
+    [SerializeField] private Animator animator;
+    [SerializeField] private KeyCode move_left;
+    [SerializeField] private KeyCode move_right;
+    [SerializeField] private KeyCode jump;
+    [SerializeField] private KeyCode down;
+    [SerializeField] private float movement_speed = 10f;
+    [SerializeField] private float jump_height;
+    [SerializeField] private bool is_grounded;
     //Used to prevent autojump by holding the jump button.
-    public bool jump_on_cooldown;
+    [SerializeField] private bool jump_on_cooldown;
     private enum Intent
     {
         Idle,
         Left,
         Right,
         Jump,
+        Crouch,
         Slam
     }
 
@@ -32,8 +34,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb2D = transform.GetComponent<Rigidbody2D>();
-        colldr = transform.GetComponent<Collider2D>();
-        distance_to_ground = colldr.bounds.extents.y + 0.1f;
+        box_colldr = transform.GetComponent<BoxCollider2D>();
+        cap_colldr = transform.GetComponent<CapsuleCollider2D>();
+        distance_to_ground = box_colldr.bounds.extents.y + 0.1f;
     }
 
 
@@ -41,79 +44,39 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        //Set/Check the player's grounded status once per frame.
+        //Set|Check the player's grounded status once per frame.
         is_grounded = IsGrounded();
 
+        if (Input.GetKey(move_left)) { x_intent = Intent.Left; }
 
-        if (Input.GetKey(move_left))
-        {
-            animator.SetBool("is_running", true);
-            x_intent = Intent.Left;
-        }
+        else if (Input.GetKey(move_right)) { x_intent = Intent.Right; }
 
-        else if (Input.GetKey(move_right))
-        {
-            animator.SetBool("is_running", true);
-            x_intent = Intent.Right;
-        }
+        else { ReturnToIdleX(); }
 
-        else
-        {
-            animator.SetBool("is_running", false);
-            x_intent = Intent.Idle;
-        }
-        //If the player presses the jump button, is grounded, and the jump button isn't being held
-        if (Input.GetKey(jump) && IsGrounded() && !jump_on_cooldown)
-        {
-            y_intent = Intent.Jump;
+        if (Input.GetKey(jump) && is_grounded && !jump_on_cooldown) { y_intent = Intent.Jump; }
 
-        }
-        //If the jump button is let go, remove the jump cooldown.
         else if (!Input.GetKey(jump) && jump_on_cooldown)
         {
             jump_on_cooldown = false;
             y_intent = Intent.Idle;
         }
-        else
-        {
-            y_intent = Intent.Idle;
-        }
+
+        else if (Input.GetKey(down) && is_grounded) { Crouch(); }
+
+        else { ReturnToIdleY(); }
     }
 
 
     private void FixedUpdate()
     {
-        if (x_intent == Intent.Left)
-        {
-            if (gameObject.transform.localScale.x > 0) //Flip the sprite if it isn't facing the correct direction.
-            {
-                this.gameObject.transform.localScale = new Vector3(-1, 1, 1); 
-            }
-            rb2D.velocity = new Vector2(-movement_speed, rb2D.velocity.y); //Move the player to the left.
-        }
+        if (x_intent == Intent.Left) { MoveLeft(); }
 
-        else if (x_intent == Intent.Right)
-        {
-            if (gameObject.transform.localScale.x < 0)
-            {
-                this.gameObject.transform.localScale = new Vector3(1, 1, 1); //Flip the sprite if it isn't facing the correct direction.
-            }
-            rb2D.velocity = new Vector2(+movement_speed, rb2D.velocity.y); //Move the player to the right.
-        }
+        else if (x_intent == Intent.Right) { MoveRight(); }
 
-        else if (x_intent == Intent.Idle)
-        {
-            rb2D.velocity = new Vector2(0, rb2D.velocity.y); //If the player isn't touching a movement key, cancel out their horizontal momentum for crisper movement.
-        }
+        else if (x_intent == Intent.Idle) { HaltHorizontalMomentum(); }
 
-        if (y_intent == Intent.Jump && IsGrounded())
-        {
-            animator.SetBool("is_jumping", true);
-            rb2D.velocity = new Vector2(rb2D.velocity.x, jump_height); //Move the player up
-            jump_on_cooldown = true;
-        }
+        if (y_intent == Intent.Jump && IsGrounded()) { Jump(); }
     }
-    //TODO Implement function to check if player is touching the ground and use it to limit our jumping.
     bool IsGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, distance_to_ground + 0.1f); //Send out a raycast below the player's feet.
@@ -133,5 +96,59 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    void Crouch()
+    {
+        animator.SetBool("is_crouching", true);
+        cap_colldr.offset = new Vector2(0, -0.35f);
+        cap_colldr.size = new Vector2(1.3f, 2.1f);
+    }
+
+    void Jump()
+    {
+        animator.SetBool("is_jumping", true);
+        rb2D.velocity = new Vector2(rb2D.velocity.x, jump_height); //Move the player up
+        jump_on_cooldown = true;
+    }
+
+    void MoveRight()
+    {
+        if (gameObject.transform.localScale.x < 0)
+        {
+            this.gameObject.transform.localScale = new Vector3(1, 1, 1); //Flip the sprite if it isn't facing the correct direction.
+        }
+        animator.SetBool("is_running", true);
+        rb2D.velocity = new Vector2(+movement_speed, rb2D.velocity.y); //Move the player to the right.
+    }
+
+    void MoveLeft()
+    {
+        if (gameObject.transform.localScale.x > 0) //Flip the sprite if it isn't facing the correct direction.
+        {
+            this.gameObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        animator.SetBool("is_running", true);
+        rb2D.velocity = new Vector2(-movement_speed, rb2D.velocity.y); //Move the player to the left.
+    }
+
+    void HaltHorizontalMomentum()
+    {
+        rb2D.velocity = new Vector2(0, rb2D.velocity.y); //If the player isn't touching a movement key, cancel out their horizontal momentum for crisper movement.
+
+    }
+
+    void ReturnToIdleY()
+    {
+        animator.SetBool("is_crouching", false);
+        y_intent = Intent.Idle;
+        cap_colldr.offset = new Vector2(0, 0);
+        cap_colldr.size = new Vector2(1.3f, 2.8f);
+    }
+
+    void ReturnToIdleX()
+    {
+        animator.SetBool("is_running", false);
+        x_intent = Intent.Idle;
     }
 }
