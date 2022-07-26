@@ -8,7 +8,7 @@ public class MissileBehavior : MonoBehaviour
 
     private Rigidbody2D rb2D;
 
-    [SerializeField] private Transform target;
+    private GameObject target;
 
     [SerializeField] private float speed;
 
@@ -31,6 +31,7 @@ public class MissileBehavior : MonoBehaviour
     {
         spawn_time = Time.time;
         rb2D = GetComponent<Rigidbody2D>();
+        target = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -51,7 +52,7 @@ public class MissileBehavior : MonoBehaviour
         {
             
             out_of_fuel = true;
-            false_position = target.position;
+            false_position = target.transform.position;
         }
         //If a missile is out of fuel, tell the animator to start spinning it and make it stop tracking the player.
         else if (out_of_fuel)
@@ -62,7 +63,7 @@ public class MissileBehavior : MonoBehaviour
         //If a missile still has fuel, proceed to chase the player.
         else
         {
-            FollowTarget(target);
+            FollowTarget(target.transform);
         }
 
         

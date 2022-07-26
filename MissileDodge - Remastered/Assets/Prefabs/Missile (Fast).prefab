@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6825834811966694913}
   - component: {fileID: 6825834811966695167}
   m_Layer: 0
-  m_Name: Missile
+  m_Name: Missile (Fast)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,9 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6825834811966695167}
-  target: {fileID: 7406747940810418172, guid: cdf12328acba2d247b7eab93c444a6cf, type: 3}
-  speed: 5
-  rotation_speed: 400
+  speed: 25
+  rotation_speed: 300
   spawn_time: 0
   time_limit: 10
 --- !u!50 &6825834811966694913
