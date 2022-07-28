@@ -72,10 +72,8 @@ public class MissileBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
-        {
-            MissileTimeout();
-        }
+
+        MissileTimeout();
         
     }
     //Chase the specified target by rotating in the direction of the negative cross product.
