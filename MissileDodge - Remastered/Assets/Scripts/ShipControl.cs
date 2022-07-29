@@ -11,17 +11,21 @@ public class ShipControl : MonoBehaviour
     private TrailRenderer rwing_trail;
     private TrailRenderer lbrake_trail;
     private TrailRenderer rbrake_trail;
+    private float glide_boost; //The amount of boost accumulated by diving
+    public float temperature = 22;
+    private bool is_frozen = false;
     [SerializeField] private Animator animator;
     [SerializeField] private KeyCode accelerate_key;
     [SerializeField] private KeyCode pitch_left_key;
     [SerializeField] private KeyCode pitch_right_key;
-    [SerializeField] private KeyCode brake_key;
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float rotation_speed = 10f;
-    [SerializeField] private float usable_rotation_speed;
-
-    [SerializeField] private Intent s_intent;
-    [SerializeField] private Intent r_intent;
+    [SerializeField] private KeyCode brake_key; 
+    [SerializeField] private float speed = 10f; //How fast the engine can go
+    [SerializeField] private float rotation_speed = 10f; //How much the player should be able to rotate
+    [SerializeField] private float usable_rotation_speed; //How much the player can actually rotate
+    [SerializeField] private float ground_position; //The position of the ground in the level (the jet cannot fly below this point)
+    [SerializeField] private float max_height; //The position of the maximum height in the level (the jet cannot fly above this point)
+    [SerializeField] private Intent s_intent; //The player's speed intent
+    [SerializeField] private Intent r_intent; //The player's rotation intent
 
     private enum Intent
     {
@@ -49,6 +53,26 @@ public class ShipControl : MonoBehaviour
     void Update()
     {
 
+        if (temperature <= -40f)
+        {
+            Freeze();
+        }
+        //If we have touched/gone below the ground the player dies.
+        if (this.transform.position.y <= ground_position)
+        {
+            DestroyShip();
+        }
+
+        if (this.transform.position.y >= max_height)
+        {
+            temperature -= 0.025f;
+        }
+        else if (this.transform.position.y <= max_height && temperature < 22)
+        {
+            temperature += 0.01f;
+        }
+
+        //The player's ability to rotate will diminish somewhat as their speed increases.
         usable_rotation_speed = rotation_speed / ((rb2D.velocity.magnitude / 50) + 1);
 
         if (Input.GetKey(accelerate_key)) { s_intent = Intent.ACCELERATE; }
@@ -65,12 +89,23 @@ public class ShipControl : MonoBehaviour
         else { r_intent = Intent.IDLE; }
 
     }
-
+    //FixedUpdate is called 50 times per second
     private void FixedUpdate()
     {
+
+        if (is_frozen)
+        {
+            engine_trail.emitting = false;
+            lwing_trail.emitting = false;
+            rwing_trail.emitting = false;
+            return;
+        }
+
+        //Apply lift forces to the ship based on its angle
         ApplyLift(CheckRotation());
 
-        if (rb2D.velocity.magnitude > 20)
+        //If the plane's speed is fast enough, we can show additional particle effects.
+        if (rb2D.velocity.magnitude > 10)
         {
             lwing_trail.emitting = true;
             rwing_trail.emitting = true;
@@ -146,11 +181,11 @@ public class ShipControl : MonoBehaviour
     {
         float ship_angle;
 
-        ship_angle = rb2D.rotation % 360;
+        ship_angle = rb2D.rotation % 360; //Gives the angle within 0-360 degrees
 
         if (ship_angle < 0)
         {
-            ship_angle = ship_angle + 360;
+            ship_angle = ship_angle + 360; //Ensures the angle is never negative.
         }
 
         return ship_angle;
@@ -164,17 +199,26 @@ public class ShipControl : MonoBehaviour
             Vector2 velocity = rb2D.velocity;
             velocity.y = velocity.y * 0.95f;
             rb2D.velocity = velocity;
-            rb2D.AddRelativeForce(Vector2.right * 10f);
+            rb2D.AddRelativeForce(Vector2.right * ((speed * 0.25f) * glide_boost));
+            rb2D.AddRelativeForce(Vector2.up * ((speed * 0.05f) * glide_boost));
+            glide_boost = glide_boost * 0.99f;
         }
         //Pointed up
         else if ((angle >= 20 && angle <= 160))
         {
             rb2D.velocity = rb2D.velocity * 0.99f;
+            rb2D.AddRelativeForce(Vector2.right * (1.5f * glide_boost));
+            glide_boost = glide_boost * 0.95f;
         }
         //Pointed down
         else if ((angle >= 200 && angle <= 340))
         {
-            rb2D.AddRelativeForce(Vector2.right * 50f);
+            rb2D.AddRelativeForce(Vector2.right * (speed * 0.5f));
+            if (glide_boost < 7f)
+            {
+                glide_boost += (speed * 0.05f);
+            }
+            
         }
     }
 
@@ -189,5 +233,16 @@ public class ShipControl : MonoBehaviour
         }
         engine_trail.emitting = false;
         rb2D.velocity = rb2D.velocity * 0.90f;
+    }
+
+    void Freeze()
+    {
+        is_frozen = true;
+        animator.SetBool("is_frozen", true);
+    }
+
+    void DestroyShip()
+    {
+        Destroy(this.gameObject);
     }
 }
