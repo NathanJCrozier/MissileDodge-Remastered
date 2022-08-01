@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShipControl : MonoBehaviour
 {
     private EdgeCollider2D colldr;
     private Rigidbody2D rb2D;
+    LevelLoader level_loader_script;
     private TrailRenderer engine_trail;
     private TrailRenderer lwing_trail;
     private TrailRenderer rwing_trail;
@@ -27,6 +29,8 @@ public class ShipControl : MonoBehaviour
     [SerializeField] private Intent s_intent; //The player's speed intent
     [SerializeField] private Intent r_intent; //The player's rotation intent
 
+    Gamepad game_pad;
+
     private enum Intent
     {
         ACCELERATE,
@@ -40,6 +44,7 @@ public class ShipControl : MonoBehaviour
     void Start()
     {
         colldr = this.gameObject.GetComponent<EdgeCollider2D>();
+        level_loader_script = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         rb2D = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
         engine_trail = this.gameObject.GetComponentsInChildren<TrailRenderer>()[0];
@@ -47,6 +52,7 @@ public class ShipControl : MonoBehaviour
         rwing_trail = this.gameObject.GetComponentsInChildren<TrailRenderer>()[2];
         lbrake_trail = this.gameObject.GetComponentsInChildren<TrailRenderer>()[3];
         rbrake_trail = this.gameObject.GetComponentsInChildren<TrailRenderer>()[4];
+        game_pad = Gamepad.current;
     }
 
     // Update is called once per frame
@@ -75,16 +81,16 @@ public class ShipControl : MonoBehaviour
         //The player's ability to rotate will diminish somewhat as their speed increases.
         usable_rotation_speed = rotation_speed / ((rb2D.velocity.magnitude / 50) + 1);
 
-        if (Input.GetKey(accelerate_key)) { s_intent = Intent.ACCELERATE; }
+        if (Input.GetKey(accelerate_key) || game_pad.rightTrigger.isPressed) { s_intent = Intent.ACCELERATE; }
 
-        else if (Input.GetKey(brake_key)) { s_intent = Intent.BRAKE; }
+        else if (Input.GetKey(brake_key) || game_pad.leftTrigger.isPressed) { s_intent = Intent.BRAKE; }
 
         else {s_intent = Intent.IDLE;}
 
 
-        if (Input.GetKey(pitch_right_key)) { r_intent = Intent.PITCHRIGHT; }
+        if (Input.GetKey(pitch_right_key) || game_pad.dpad.right.isPressed) { r_intent = Intent.PITCHRIGHT; }
 
-        else if (Input.GetKey(pitch_left_key)) { r_intent = Intent.PITCHLEFT; }
+        else if (Input.GetKey(pitch_left_key) || game_pad.dpad.left.isPressed) { r_intent = Intent.PITCHLEFT; }
 
         else { r_intent = Intent.IDLE; }
 
@@ -121,11 +127,13 @@ public class ShipControl : MonoBehaviour
         if (s_intent == Intent.ACCELERATE)
         {
             Accelerate();
+            game_pad.SetMotorSpeeds(0.25f, 0.5f);
         }
 
         else if (s_intent == Intent.BRAKE)
         {
             Brake();
+            game_pad.SetMotorSpeeds(0.5f, 0.75f);
         }
         else if (s_intent == Intent.IDLE)
         {
@@ -134,6 +142,7 @@ public class ShipControl : MonoBehaviour
             lbrake_trail.emitting = false;
             rbrake_trail.emitting = false;
             engine_trail.emitting = false;
+            game_pad.SetMotorSpeeds(0f, 0f);
         }
 
         if (r_intent == Intent.PITCHLEFT)
@@ -244,5 +253,6 @@ public class ShipControl : MonoBehaviour
     void DestroyShip()
     {
         Destroy(this.gameObject);
+        level_loader_script.LoadLevel("GameOver");
     }
 }
