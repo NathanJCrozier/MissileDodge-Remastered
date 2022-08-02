@@ -4,21 +4,21 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class TemperatureReadout : MonoBehaviour
+public class SpeedReadout : MonoBehaviour
 {
     ShipControl ship_control_script;
-    TMP_Text temperature;
+    TMP_Text speed;
 
     // Start is called before the first frame update
     void Awake()
     {
         ship_control_script = GameObject.Find("Player").GetComponent<ShipControl>();
-        temperature = this.GetComponents<TextMeshProUGUI>()[0];
+        speed = this.GetComponents<TextMeshProUGUI>()[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        temperature.text = "Temperature: " + ((int)(ship_control_script.temperature)).ToString() + "°C";
+        speed.text = "Speed: " + ((int)(ship_control_script.currrent_speed)).ToString() + "kt";
     }
 }

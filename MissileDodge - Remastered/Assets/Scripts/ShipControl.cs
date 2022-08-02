@@ -15,8 +15,11 @@ public class ShipControl : MonoBehaviour
     private TrailRenderer rbrake_trail;
     private float glide_boost; //The amount of boost accumulated by diving
     public float temperature = 22;
+    public float altitude = 0;
+    public float currrent_speed = 0;
+    public float curr_angle = 0;
     private bool is_frozen = false;
-    [SerializeField] private Animator animator;
+    private Animator animator;
     [SerializeField] private KeyCode accelerate_key;
     [SerializeField] private KeyCode pitch_left_key;
     [SerializeField] private KeyCode pitch_right_key;
@@ -59,25 +62,6 @@ public class ShipControl : MonoBehaviour
     void Update()
     {
 
-        if (temperature <= -40f)
-        {
-            Freeze();
-        }
-        //If we have touched/gone below the ground the player dies.
-        if (this.transform.position.y <= ground_position)
-        {
-            DestroyShip();
-        }
-
-        if (this.transform.position.y >= max_height)
-        {
-            temperature -= 0.025f;
-        }
-        else if (this.transform.position.y <= max_height && temperature < 22)
-        {
-            temperature += 0.01f;
-        }
-
         //The player's ability to rotate will diminish somewhat as their speed increases.
         usable_rotation_speed = rotation_speed / ((rb2D.velocity.magnitude / 50) + 1);
 
@@ -99,6 +83,33 @@ public class ShipControl : MonoBehaviour
     private void FixedUpdate()
     {
 
+        curr_angle = CheckRotation();
+
+        MaintainUpright();
+
+        if (temperature <= -40f)
+        {
+            Freeze();
+        }
+        //If we have touched/gone below the ground the player dies.
+        if (this.transform.position.y <= ground_position)
+        {
+            DestroyShip();
+        }
+
+        if (this.transform.position.y >= max_height)
+        {
+            temperature -= 0.05f;
+        }
+        else if (this.transform.position.y <= max_height && temperature < 22)
+        {
+            temperature += 0.020f;
+        }
+
+        altitude = (this.transform.position.y - ground_position) * 50;
+
+        currrent_speed = (rb2D.velocity.magnitude * 100);
+
         if (is_frozen)
         {
             engine_trail.emitting = false;
@@ -108,7 +119,7 @@ public class ShipControl : MonoBehaviour
         }
 
         //Apply lift forces to the ship based on its angle
-        ApplyLift(CheckRotation());
+        ApplyLift();
 
         //If the plane's speed is fast enough, we can show additional particle effects.
         if (rb2D.velocity.magnitude > 10)
@@ -200,10 +211,10 @@ public class ShipControl : MonoBehaviour
         return ship_angle;
     }
 
-    void ApplyLift(float angle)
+    void ApplyLift()
     {
         //Flattened out
-        if ((angle >= 0 && angle <= 20) || (angle >= 160 && angle <= 200) || (angle >= 340 && angle <= 360))
+        if ((curr_angle >= 0 && curr_angle <= 20) || (curr_angle >= 160 && curr_angle <= 200) || (curr_angle >= 340 && curr_angle <= 360))
         {
             Vector2 velocity = rb2D.velocity;
             velocity.y = velocity.y * 0.95f;
@@ -213,14 +224,14 @@ public class ShipControl : MonoBehaviour
             glide_boost = glide_boost * 0.99f;
         }
         //Pointed up
-        else if ((angle >= 20 && angle <= 160))
+        else if ((curr_angle >= 20 && curr_angle <= 160))
         {
             rb2D.velocity = rb2D.velocity * 0.99f;
             rb2D.AddRelativeForce(Vector2.right * (1.5f * glide_boost));
             glide_boost = glide_boost * 0.95f;
         }
         //Pointed down
-        else if ((angle >= 200 && angle <= 340))
+        else if ((curr_angle >= 200 && curr_angle <= 340))
         {
             rb2D.AddRelativeForce(Vector2.right * (speed * 0.5f));
             if (glide_boost < 7f)
@@ -229,6 +240,41 @@ public class ShipControl : MonoBehaviour
             }
             
         }
+    }
+
+    void MaintainUpright()
+    {
+        if (rb2D.velocity.magnitude > 3)
+        {
+            return;
+        }
+
+        if (curr_angle >= 160 && curr_angle <= 200)
+        {
+
+            if (gameObject.transform.localScale.y > 0) //Flip the sprite if it isn't facing the correct direction.
+            {
+                Roll();
+                FlipSprite();
+            }
+
+        }
+
+        if ((curr_angle >= 0 && curr_angle <= 20) || (curr_angle >= 340 && curr_angle <= 360))
+        {
+
+            if (gameObject.transform.localScale.y < 0) //Flip the sprite if it isn't facing the correct direction.
+            {
+                Roll();
+                FlipSprite();
+            }
+
+        }
+    }
+
+    void FlipSprite()
+    {
+        this.gameObject.transform.localScale = Vector3.Scale(this.gameObject.transform.localScale, new Vector3(1, -1, 1));
     }
 
     void Brake()
@@ -248,6 +294,11 @@ public class ShipControl : MonoBehaviour
     {
         is_frozen = true;
         animator.SetBool("is_frozen", true);
+    }
+
+    void Roll()
+    {
+        animator.SetTrigger("Roll");
     }
 
     void DestroyShip()
