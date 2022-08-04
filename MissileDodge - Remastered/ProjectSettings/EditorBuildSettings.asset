@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Level.unity
+    path: Assets/Scenes/Intro.unity
+    guid: c600d04aaff208043aeebe534a3415b3
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b38065c959cd46142a1b304d64ab960d
+  - enabled: 1
+    path: Assets/Scenes/DesertOasis.unity
     guid: d17fb15e23951794aa6cdac9aae89403
+  - enabled: 1
+    path: Assets/Scenes/TwilightMountains.unity
+    guid: 9ac29ac56cf33334fa1bd4c9f4645359
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 1a8c281111f58364ead03cef2ffa1831

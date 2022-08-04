@@ -25,8 +25,10 @@ public class Parallax : MonoBehaviour
         {
             start_position += length;
         }
-        else if (temp < start_position - length) start_position -= length;
-
+        else if (temp < start_position - length)
+        {
+            start_position -= length;
+        }
         float distance = (game_camera.transform.position.x * parallax_effect);
 
         transform.position = new Vector3(start_position + distance, transform.position.y, transform.position.z);

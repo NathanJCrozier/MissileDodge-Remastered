@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7571541884831699647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7571541884831699645}
+  - component: {fileID: 7571541884831699644}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7571541884831699645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7571541884831699647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7571541884831699644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7571541884831699647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9401240f2f6670d408e2dbdec3a5439a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: DesertOasis
+    clip: {fileID: 8300000, guid: 6fcf535daaa031a4598d9ccf79da0358, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: TwilightMountains
+    clip: {fileID: 8300000, guid: d782590a439122044bc1dd5efd89cb2c, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: 6fcf535daaa031a4598d9ccf79da0358, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: d782590a439122044bc1dd5efd89cb2c, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: Crash
+    clip: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: Freeze
+    clip: {fileID: 8300000, guid: a2adf89a8a3d7b44696b25a1fdd1a176, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: Brake
+    clip: {fileID: 8300000, guid: 2424b99f23d624742be36f8c29da4117, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}
+  - name: Accelerate
+    clip: {fileID: 8300000, guid: 6c17e185117634841b3c6c9300d97033, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 8300000, guid: aae91b019f9c4fe4ab85d8fe085ff9db, type: 3}

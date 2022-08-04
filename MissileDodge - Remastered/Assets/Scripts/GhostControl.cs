@@ -19,7 +19,7 @@ public class GhostControl : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            level_loader_script.LoadLevel("Main Level");
+            level_loader_script.LoadLevel("MainMenu");
         }
     }
 }

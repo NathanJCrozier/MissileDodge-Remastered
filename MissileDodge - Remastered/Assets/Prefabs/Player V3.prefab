@@ -204,7 +204,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
@@ -411,7 +411,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   temperature: 22
-  animator: {fileID: 0}
+  altitude: 0
+  currrent_speed: 0
+  curr_angle: 0
   accelerate_key: 32
   pitch_left_key: 97
   pitch_right_key: 100

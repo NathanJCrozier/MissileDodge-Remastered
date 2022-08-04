@@ -14,6 +14,7 @@ public class ShipControl : MonoBehaviour
     private TrailRenderer lbrake_trail;
     private TrailRenderer rbrake_trail;
     private float glide_boost; //The amount of boost accumulated by diving
+    private int frames_spent_upside_down = 0;
     public float temperature = 22;
     public float altitude = 0;
     public float currrent_speed = 0;
@@ -33,6 +34,7 @@ public class ShipControl : MonoBehaviour
     [SerializeField] private Intent r_intent; //The player's rotation intent
 
     Gamepad game_pad;
+    private bool gamepad_enabled = true;
 
     private enum Intent
     {
@@ -65,18 +67,16 @@ public class ShipControl : MonoBehaviour
         //The player's ability to rotate will diminish somewhat as their speed increases.
         usable_rotation_speed = rotation_speed / ((rb2D.velocity.magnitude / 50) + 1);
 
-        if (Input.GetKey(accelerate_key) || game_pad.rightTrigger.isPressed) { s_intent = Intent.ACCELERATE; }
+        if (gamepad_enabled && game_pad != null)
+        {
+            CheckGamepadInput();
+        }
 
-        else if (Input.GetKey(brake_key) || game_pad.leftTrigger.isPressed) { s_intent = Intent.BRAKE; }
-
-        else {s_intent = Intent.IDLE;}
-
-
-        if (Input.GetKey(pitch_right_key) || game_pad.dpad.right.isPressed) { r_intent = Intent.PITCHRIGHT; }
-
-        else if (Input.GetKey(pitch_left_key) || game_pad.dpad.left.isPressed) { r_intent = Intent.PITCHLEFT; }
-
-        else { r_intent = Intent.IDLE; }
+        else
+        {
+            CheckKeyboardInput();
+        }
+        
 
     }
     //FixedUpdate is called 50 times per second
@@ -137,23 +137,24 @@ public class ShipControl : MonoBehaviour
 
         if (s_intent == Intent.ACCELERATE)
         {
+            FindObjectOfType<AudioManager>().Play("Accelerate");
             Accelerate();
-            game_pad.SetMotorSpeeds(0.25f, 0.5f);
         }
 
         else if (s_intent == Intent.BRAKE)
         {
+            FindObjectOfType<AudioManager>().Play("Brake");
             Brake();
-            game_pad.SetMotorSpeeds(0.5f, 0.75f);
         }
         else if (s_intent == Intent.IDLE)
         {
+            FindObjectOfType<AudioManager>().Stop("Accelerate");
+            FindObjectOfType<AudioManager>().Stop("Brake");
             animator.SetBool("is_accelerating", false);
             animator.SetBool("is_braking", false);
             lbrake_trail.emitting = false;
             rbrake_trail.emitting = false;
             engine_trail.emitting = false;
-            game_pad.SetMotorSpeeds(0f, 0f);
         }
 
         if (r_intent == Intent.PITCHLEFT)
@@ -172,8 +173,41 @@ public class ShipControl : MonoBehaviour
         }
     }
 
+    void CheckGamepadInput()
+    {
+        if (game_pad.rightTrigger.isPressed) { s_intent = Intent.ACCELERATE; }
+
+        else if (game_pad.leftTrigger.isPressed) { s_intent = Intent.BRAKE; }
+
+        else { s_intent = Intent.IDLE; }
+
+
+        if (game_pad.dpad.right.isPressed) { r_intent = Intent.PITCHRIGHT; }
+
+        else if (game_pad.dpad.left.isPressed) { r_intent = Intent.PITCHLEFT; }
+
+        else { r_intent = Intent.IDLE; }
+    }
+
+    void CheckKeyboardInput()
+    {
+        if (Input.GetKey(accelerate_key)) { s_intent = Intent.ACCELERATE; }
+
+        else if (Input.GetKey(brake_key)) { s_intent = Intent.BRAKE; }
+
+        else { s_intent = Intent.IDLE; }
+
+
+        if (Input.GetKey(pitch_right_key)) { r_intent = Intent.PITCHRIGHT; }
+
+        else if (Input.GetKey(pitch_left_key)) { r_intent = Intent.PITCHLEFT; }
+
+        else { r_intent = Intent.IDLE; }
+    }
+
     void Accelerate()
     {
+
         animator.SetBool("is_accelerating", true);
         animator.SetBool("is_braking", false);
         lbrake_trail.emitting = false;
@@ -246,16 +280,32 @@ public class ShipControl : MonoBehaviour
     {
         if (rb2D.velocity.magnitude > 3)
         {
+            //If speed is high enough the plane has too much momentum to flip over
+            if (frames_spent_upside_down > 0)
+            {
+                frames_spent_upside_down--;
+            }
+            
             return;
         }
+
+
 
         if (curr_angle >= 160 && curr_angle <= 200)
         {
 
             if (gameObject.transform.localScale.y > 0) //Flip the sprite if it isn't facing the correct direction.
             {
-                Roll();
-                FlipSprite();
+
+                frames_spent_upside_down++;
+
+                if (frames_spent_upside_down > 30)
+                {
+                    Roll();
+                    FlipSprite();
+                    frames_spent_upside_down = 0;
+                }
+
             }
 
         }
@@ -265,8 +315,14 @@ public class ShipControl : MonoBehaviour
 
             if (gameObject.transform.localScale.y < 0) //Flip the sprite if it isn't facing the correct direction.
             {
-                Roll();
-                FlipSprite();
+                frames_spent_upside_down++;
+
+                if (frames_spent_upside_down > 30)
+                {
+                    Roll();
+                    FlipSprite();
+                    frames_spent_upside_down = 0;
+                }
             }
 
         }
@@ -292,6 +348,7 @@ public class ShipControl : MonoBehaviour
 
     void Freeze()
     {
+        FindObjectOfType<AudioManager>().Play("Freeze");
         is_frozen = true;
         animator.SetBool("is_frozen", true);
     }
@@ -303,7 +360,8 @@ public class ShipControl : MonoBehaviour
 
     void DestroyShip()
     {
-        Destroy(this.gameObject);
+        FindObjectOfType<AudioManager>().Play("Crash");
         level_loader_script.LoadLevel("GameOver");
+        Destroy(gameObject);
     }
 }
