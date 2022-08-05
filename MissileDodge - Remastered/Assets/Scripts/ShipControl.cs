@@ -103,7 +103,7 @@ public class ShipControl : MonoBehaviour
         }
         else if (this.transform.position.y <= max_height && temperature < 22)
         {
-            temperature += 0.020f;
+            temperature += 0.025f;
         }
 
         altitude = (this.transform.position.y - ground_position) * 50;
@@ -115,6 +115,7 @@ public class ShipControl : MonoBehaviour
             engine_trail.emitting = false;
             lwing_trail.emitting = false;
             rwing_trail.emitting = false;
+            this.rb2D.gravityScale = 1.5f;
             return;
         }
 

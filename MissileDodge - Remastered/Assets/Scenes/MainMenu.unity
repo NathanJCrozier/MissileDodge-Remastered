@@ -970,6 +970,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7571541884831699644, guid: 99925f3ea7c4e4348aafaf88e0414483, type: 3}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4a406285223a51b438ae88abe9c0ae5e, type: 3}
+    - target: {fileID: 7571541884831699644, guid: 99925f3ea7c4e4348aafaf88e0414483, type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e5e0babb13887e749ae5ca60216ca72c, type: 3}
     - target: {fileID: 7571541884831699645, guid: 99925f3ea7c4e4348aafaf88e0414483, type: 3}
       propertyPath: m_RootOrder
       value: 2
